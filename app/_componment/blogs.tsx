@@ -2,20 +2,28 @@
 
 import { ApiResponse, Post } from "@/core/model/posts.model";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 export default function Blogs({ data }: { data: ApiResponse }) {
-  const [dataApi, setDataApi] = React.useState<ApiResponse>(data);
-  const [posts, setPosts] = React.useState<Post[]>([]);
+  const [dataApi, setDataApi] = useState<ApiResponse>(data);
+  const [posts, setPosts] = useState<Post[]>([]);
 
-  React.useEffect(() => {
+  useEffect(() => {
+    setPosts([...posts, ...dataApi.posts]);
+  }, []);
+
+  useEffect(() => {
     setPosts([...posts, ...dataApi.posts]);
   }, [dataApi]);
 
   return (
     <div className="w-full flex flex-col justify-start">
       {posts.map((post: Post) => (
-        <Link href={`/blogs/${post.id}`} className="w-full space-y-6">
+        <Link
+          key={post.id}
+          href={`/blogs/${post.id}`}
+          className="w-full space-y-6"
+        >
           <div className="text-start">
             {post.id}. {post.title}
           </div>
