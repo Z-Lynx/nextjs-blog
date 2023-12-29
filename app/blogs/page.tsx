@@ -6,7 +6,7 @@ export const dynamic = "force-dynamic";
 
 async function getServerSideProps(context: any) {
   const id = context.params?.id;
-  const response = await fetch("http://localhost:3000/api/blogs");
+  const response = await fetch("https://dummyjson.com/blogs");
   const data = await response.json();
   const post = data.data;
 
@@ -18,7 +18,7 @@ async function getServerSideProps(context: any) {
 }
 
 async function fetchBlogs() {
-  const response = await fetch("http://localhost:3000/api/blogs", {
+  const response = await fetch("https://dummyjson.com/blogs", {
     // cache: "force-cache", ///< SSG getStaticSideProps
     cache: "no-store", ///< SSR getServerSideProps
     // next: {

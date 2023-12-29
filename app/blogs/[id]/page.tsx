@@ -3,7 +3,7 @@ import { Post } from "@/core/model/posts.model";
 //🌨️ Next.js 12 implementation
 async function getStaticSideProps(context: any) {
   const id = context.params?.id;
-  const postResponse = await fetch("http://localhost:3000/api/blogs?limit=150");
+  const postResponse = await fetch("https://dummyjson.com/blogs?limit=150");
   const post = await postResponse.json();
   const data = post.data.posts;
 
@@ -16,9 +16,7 @@ async function getStaticSideProps(context: any) {
 
 //Same as: getStaticPaths // ssr
 export async function generateStaticParams() {
-  const postsResponse = await fetch(
-    "http://localhost:3000/api/blogs?limit=150"
-  );
+  const postsResponse = await fetch("https://dummyjson.com/blogs?limit=150");
 
   const posts = await postsResponse.json();
   const data = posts.data.posts;
@@ -29,7 +27,7 @@ export async function generateStaticParams() {
 }
 
 async function fetchPost(id: string) {
-  const postResponse = await fetch(`http://localhost:3000/api/blogs/${id}`);
+  const postResponse = await fetch(`https://dummyjson.com/blogs/${id}`);
 
   console.log("Fetching blog post with id: ", id);
   const data = await postResponse.json();

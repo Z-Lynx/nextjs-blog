@@ -35,7 +35,7 @@ export default function Blogs({ data }: { data: ApiResponse }) {
             const page: number = dataApi.skip / 10 + 1;
 
             const response = await fetch(
-              "http://localhost:3000/api/blogs/?page=" + page
+              "https://dummyjson.com/blogs/?page=" + page
             );
             const res = await response.json();
             setDataApi(res.data);
