@@ -8,10 +8,11 @@ async function getServerSideProps(context: any) {
   const id = context.params?.id;
   const response = await fetch("http://localhost:3000/api/blogs");
   const data = await response.json();
+  const post = data.data;
 
   return {
     props: {
-      data,
+      post,
     },
   };
 }

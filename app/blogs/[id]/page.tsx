@@ -5,10 +5,11 @@ async function getStaticSideProps(context: any) {
   const id = context.params?.id;
   const postResponse = await fetch("http://localhost:3000/api/blogs?limit=150");
   const post = await postResponse.json();
+  const data = post.data.posts;
 
   return {
     props: {
-      post,
+      data,
     },
   };
 }
@@ -20,9 +21,9 @@ export async function generateStaticParams() {
   );
 
   const posts = await postsResponse.json();
-  const data = posts.data;
+  const data = posts.data.posts;
 
-  return data.posts.map((post: any) => ({
+  return data.map((post: any) => ({
     id: String(post.id),
   }));
 }
